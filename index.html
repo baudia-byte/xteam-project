@@ -1,0 +1,971 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>X-Team Talent Optimization Project | PI HIRE Collective</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,600;0,700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --navy-900: #0a1628;
+      --navy-800: #132039;
+      --navy-700: #1a365d;
+      --navy-600: #2d5a87;
+      --slate-100: #f1f5f9;
+      --slate-200: #e2e8f0;
+      --slate-300: #cbd5e1;
+      --slate-400: #94a3b8;
+      --white: #ffffff;
+      --accent-orange: #f97316;
+      --accent-gold: #fbbf24;
+      --success-green: #10b981;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--navy-900);
+      color: var(--white);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* Animated Background */
+    .bg-pattern {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      background: 
+        radial-gradient(ellipse at 20% 20%, rgba(45, 90, 135, 0.3) 0%, transparent 50%),
+        radial-gradient(ellipse at 80% 80%, rgba(26, 54, 93, 0.4) 0%, transparent 50%),
+        linear-gradient(180deg, var(--navy-900) 0%, var(--navy-800) 100%);
+    }
+
+    .bg-pattern::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: 
+        radial-gradient(circle at 25% 25%, rgba(255,255,255,0.02) 1px, transparent 1px),
+        radial-gradient(circle at 75% 75%, rgba(255,255,255,0.02) 1px, transparent 1px);
+      background-size: 60px 60px;
+    }
+
+    /* Navigation */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      padding: 1.5rem 4rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 100;
+      background: linear-gradient(180deg, rgba(10, 22, 40, 0.95) 0%, transparent 100%);
+      backdrop-filter: blur(10px);
+    }
+
+    .logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--white);
+      letter-spacing: -0.5px;
+    }
+
+    .logo span {
+      color: var(--accent-orange);
+    }
+
+    nav a {
+      color: var(--slate-300);
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 500;
+      transition: color 0.3s ease;
+    }
+
+    nav a:hover {
+      color: var(--white);
+    }
+
+    /* Hero Section */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 8rem 2rem 4rem;
+      position: relative;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: rgba(249, 115, 22, 0.15);
+      border: 1px solid rgba(249, 115, 22, 0.3);
+      padding: 0.5rem 1.25rem;
+      border-radius: 100px;
+      font-size: 0.85rem;
+      color: var(--accent-orange);
+      font-weight: 600;
+      margin-bottom: 2rem;
+      animation: fadeInUp 0.8s ease forwards;
+      opacity: 0;
+    }
+
+    .hero-badge::before {
+      content: '';
+      width: 8px;
+      height: 8px;
+      background: var(--accent-orange);
+      border-radius: 50%;
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.5; transform: scale(1.2); }
+    }
+
+    .hero h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.5rem, 6vw, 4.5rem);
+      font-weight: 700;
+      line-height: 1.1;
+      max-width: 900px;
+      margin-bottom: 1.5rem;
+      animation: fadeInUp 0.8s ease 0.1s forwards;
+      opacity: 0;
+    }
+
+    .hero h1 .highlight {
+      background: linear-gradient(135deg, var(--accent-orange) 0%, var(--accent-gold) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero-subtitle {
+      font-size: 1.25rem;
+      color: var(--slate-300);
+      max-width: 600px;
+      margin-bottom: 3rem;
+      animation: fadeInUp 0.8s ease 0.2s forwards;
+      opacity: 0;
+    }
+
+    .hero-stats {
+      display: flex;
+      gap: 4rem;
+      margin-top: 2rem;
+      animation: fadeInUp 0.8s ease 0.3s forwards;
+      opacity: 0;
+    }
+
+    .stat {
+      text-align: center;
+    }
+
+    .stat-value {
+      font-family: 'Playfair Display', serif;
+      font-size: 3.5rem;
+      font-weight: 700;
+      color: var(--success-green);
+      line-height: 1;
+    }
+
+    .stat-label {
+      font-size: 0.9rem;
+      color: var(--slate-400);
+      margin-top: 0.5rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .scroll-indicator {
+      position: absolute;
+      bottom: 2rem;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+      color: var(--slate-400);
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      animation: bounce 2s infinite;
+    }
+
+    .scroll-indicator::after {
+      content: '';
+      width: 1px;
+      height: 40px;
+      background: linear-gradient(180deg, var(--slate-400) 0%, transparent 100%);
+    }
+
+    @keyframes bounce {
+      0%, 100% { transform: translateX(-50%) translateY(0); }
+      50% { transform: translateX(-50%) translateY(10px); }
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Sections */
+    section {
+      padding: 6rem 2rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .section-label {
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 3px;
+      color: var(--accent-orange);
+      font-weight: 600;
+      margin-bottom: 1rem;
+    }
+
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 600;
+      margin-bottom: 1.5rem;
+      max-width: 700px;
+    }
+
+    .section-text {
+      font-size: 1.1rem;
+      color: var(--slate-300);
+      max-width: 700px;
+      margin-bottom: 2rem;
+    }
+
+    /* Problem/Solution Section */
+    .opportunity {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
+    }
+
+    .opportunity-content {
+      padding-right: 2rem;
+    }
+
+    .drives-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+    }
+
+    .drive-card {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 16px;
+      padding: 1.5rem;
+      transition: all 0.3s ease;
+    }
+
+    .drive-card:hover {
+      background: rgba(255, 255, 255, 0.06);
+      border-color: rgba(249, 115, 22, 0.3);
+      transform: translateY(-4px);
+    }
+
+    .drive-icon {
+      width: 48px;
+      height: 48px;
+      background: linear-gradient(135deg, var(--navy-600) 0%, var(--navy-700) 100%);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 1rem;
+      font-size: 1.25rem;
+    }
+
+    .drive-card h4 {
+      font-size: 1.1rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+
+    .drive-card p {
+      font-size: 0.9rem;
+      color: var(--slate-400);
+    }
+
+    /* Pricing Section */
+    .pricing {
+      background: linear-gradient(180deg, transparent 0%, rgba(26, 54, 93, 0.2) 50%, transparent 100%);
+      padding: 8rem 2rem;
+    }
+
+    .pricing-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .pricing-header {
+      text-align: center;
+      margin-bottom: 4rem;
+    }
+
+    .comparison-table {
+      width: 100%;
+      border-collapse: separate;
+      border-spacing: 0;
+      background: rgba(255, 255, 255, 0.02);
+      border-radius: 20px;
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .comparison-table th,
+    .comparison-table td {
+      padding: 1.25rem 1.5rem;
+      text-align: center;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    }
+
+    .comparison-table th:first-child,
+    .comparison-table td:first-child {
+      text-align: left;
+      font-weight: 600;
+    }
+
+    .comparison-table thead th {
+      background: var(--navy-700);
+      font-size: 0.85rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      padding: 1.5rem;
+    }
+
+    .comparison-table thead th:nth-child(3),
+    .comparison-table thead th:nth-child(4) {
+      background: linear-gradient(135deg, var(--accent-orange) 0%, #ea580c 100%);
+    }
+
+    .comparison-table tbody tr:last-child td {
+      border-bottom: none;
+      background: rgba(16, 185, 129, 0.1);
+      font-weight: 700;
+    }
+
+    .comparison-table tbody tr:last-child td:first-child {
+      border-radius: 0 0 0 20px;
+    }
+
+    .comparison-table tbody tr:last-child td:last-child {
+      border-radius: 0 0 20px 0;
+    }
+
+    .price-highlight {
+      color: var(--success-green);
+      font-size: 1.25rem;
+      font-weight: 700;
+    }
+
+    .price-old {
+      color: var(--slate-400);
+      text-decoration: line-through;
+    }
+
+    .price-note {
+      display: block;
+      font-size: 0.8rem;
+      color: var(--slate-400);
+      font-weight: 400;
+      margin-top: 0.25rem;
+    }
+
+    .savings-callout {
+      display: flex;
+      justify-content: center;
+      gap: 3rem;
+      margin-top: 3rem;
+      padding: 2rem;
+      background: rgba(16, 185, 129, 0.1);
+      border: 1px solid rgba(16, 185, 129, 0.2);
+      border-radius: 16px;
+    }
+
+    .savings-item {
+      text-align: center;
+    }
+
+    .savings-value {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: var(--success-green);
+    }
+
+    .savings-label {
+      font-size: 0.9rem;
+      color: var(--slate-300);
+    }
+
+    /* Features Section */
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+      margin-top: 3rem;
+    }
+
+    .feature-card {
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      border-radius: 20px;
+      padding: 2rem;
+      transition: all 0.4s ease;
+    }
+
+    .feature-card:hover {
+      background: rgba(255, 255, 255, 0.05);
+      transform: translateY(-8px);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+    }
+
+    .feature-icon {
+      width: 56px;
+      height: 56px;
+      background: linear-gradient(135deg, var(--accent-orange) 0%, var(--accent-gold) 100%);
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .feature-card h3 {
+      font-size: 1.25rem;
+      font-weight: 600;
+      margin-bottom: 0.75rem;
+    }
+
+    .feature-card p {
+      color: var(--slate-400);
+      font-size: 0.95rem;
+    }
+
+    /* Timeline Section */
+    .timeline {
+      position: relative;
+      margin-top: 3rem;
+    }
+
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 50%;
+      top: 0;
+      bottom: 0;
+      width: 2px;
+      background: linear-gradient(180deg, var(--accent-orange) 0%, var(--navy-600) 100%);
+      transform: translateX(-50%);
+    }
+
+    .timeline-item {
+      display: flex;
+      align-items: center;
+      margin-bottom: 3rem;
+    }
+
+    .timeline-item:nth-child(odd) {
+      flex-direction: row-reverse;
+    }
+
+    .timeline-content {
+      width: 45%;
+      padding: 1.5rem 2rem;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 16px;
+    }
+
+    .timeline-item:nth-child(odd) .timeline-content {
+      text-align: right;
+    }
+
+    .timeline-marker {
+      width: 10%;
+      display: flex;
+      justify-content: center;
+    }
+
+    .timeline-dot {
+      width: 20px;
+      height: 20px;
+      background: var(--accent-orange);
+      border-radius: 50%;
+      border: 4px solid var(--navy-900);
+      box-shadow: 0 0 0 4px rgba(249, 115, 22, 0.3);
+    }
+
+    .timeline-step {
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: var(--accent-orange);
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+
+    .timeline-content h4 {
+      font-size: 1.1rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .timeline-content p {
+      font-size: 0.9rem;
+      color: var(--slate-400);
+    }
+
+    /* CTA Section */
+    .cta {
+      text-align: center;
+      padding: 8rem 2rem;
+      position: relative;
+    }
+
+    .cta::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 600px;
+      height: 600px;
+      background: radial-gradient(circle, rgba(249, 115, 22, 0.15) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .cta-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 4vw, 3rem);
+      margin-bottom: 1.5rem;
+      position: relative;
+    }
+
+    .cta-text {
+      font-size: 1.1rem;
+      color: var(--slate-300);
+      max-width: 600px;
+      margin: 0 auto 2.5rem;
+      position: relative;
+    }
+
+    .cta-button {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.75rem;
+      background: linear-gradient(135deg, var(--accent-orange) 0%, #ea580c 100%);
+      color: var(--white);
+      font-size: 1rem;
+      font-weight: 600;
+      padding: 1rem 2.5rem;
+      border-radius: 100px;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      box-shadow: 0 10px 30px rgba(249, 115, 22, 0.3);
+      position: relative;
+    }
+
+    .cta-button:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 15px 40px rgba(249, 115, 22, 0.4);
+    }
+
+    .cta-button::after {
+      content: '→';
+      transition: transform 0.3s ease;
+    }
+
+    .cta-button:hover::after {
+      transform: translateX(4px);
+    }
+
+    /* Footer */
+    footer {
+      padding: 3rem 2rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.06);
+      text-align: center;
+      color: var(--slate-400);
+      font-size: 0.9rem;
+    }
+
+    footer a {
+      color: var(--slate-300);
+      text-decoration: none;
+    }
+
+    footer a:hover {
+      color: var(--white);
+    }
+
+    /* Responsive */
+    @media (max-width: 968px) {
+      nav {
+        padding: 1rem 2rem;
+      }
+
+      .opportunity {
+        grid-template-columns: 1fr;
+        gap: 3rem;
+      }
+
+      .opportunity-content {
+        padding-right: 0;
+      }
+
+      .features-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-stats {
+        flex-direction: column;
+        gap: 2rem;
+      }
+
+      .comparison-table {
+        font-size: 0.85rem;
+      }
+
+      .comparison-table th,
+      .comparison-table td {
+        padding: 1rem 0.75rem;
+      }
+
+      .timeline::before {
+        left: 20px;
+      }
+
+      .timeline-item,
+      .timeline-item:nth-child(odd) {
+        flex-direction: row;
+      }
+
+      .timeline-marker {
+        width: auto;
+        margin-right: 1rem;
+      }
+
+      .timeline-content,
+      .timeline-item:nth-child(odd) .timeline-content {
+        width: 100%;
+        text-align: left;
+      }
+
+      .savings-callout {
+        flex-direction: column;
+        gap: 1.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="bg-pattern"></div>
+
+  <nav>
+    <div class="logo"><span>X</span>-Team Collective</div>
+    <a href="#pricing">View Pricing</a>
+  </nav>
+
+  <section class="hero">
+    <div class="hero-badge">Founding 10 Exclusive Offer</div>
+    <h1>Talent Optimization for <span class="highlight">X-Team Firms</span></h1>
+    <p class="hero-subtitle">Enterprise-grade behavioral science at wholesale rates. The PI HIRE Collective gives your team a competitive edge through data-driven leadership.</p>
+    
+    <div class="hero-stats">
+      <div class="stat">
+        <div class="stat-value">76%</div>
+        <div class="stat-label">Software Savings</div>
+      </div>
+      <div class="stat">
+        <div class="stat-value">$5,420</div>
+        <div class="stat-label">Saved Annually</div>
+      </div>
+      <div class="stat">
+        <div class="stat-value">24hr</div>
+        <div class="stat-label">Support Turnaround</div>
+      </div>
+    </div>
+
+    <div class="scroll-indicator">Scroll</div>
+  </section>
+
+  <section id="opportunity">
+    <div class="opportunity">
+      <div class="opportunity-content">
+        <div class="section-label">The Opportunity</div>
+        <h2 class="section-title">Optimize the Team You Already Have</h2>
+        <p class="section-text">The "Founding 10" model levels the playing field. By aggregating our headcount, we provide small firms with the same elite behavioral insights used by the Fortune 500 at a <strong>wholesale price point 76% below standard retail rates.</strong></p>
+        <p class="section-text">Using the Predictive Index, firms decode four core behavioral drives to identify Caution Areas, bridge communication gaps that cause turnover, and lead with data-driven confidence.</p>
+      </div>
+      
+      <div class="drives-grid">
+        <div class="drive-card">
+          <div class="drive-icon">⚡</div>
+          <h4>Dominance</h4>
+          <p>Drive for control and influence over environment</p>
+        </div>
+        <div class="drive-card">
+          <div class="drive-icon">🎯</div>
+          <h4>Extraversion</h4>
+          <p>Drive for social interaction and connection</p>
+        </div>
+        <div class="drive-card">
+          <div class="drive-icon">⚖️</div>
+          <h4>Patience</h4>
+          <p>Drive for consistency and stability</p>
+        </div>
+        <div class="drive-card">
+          <div class="drive-icon">📐</div>
+          <h4>Formality</h4>
+          <p>Drive for structure and precision</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="pricing" id="pricing">
+    <div class="pricing-inner">
+      <div class="pricing-header">
+        <div class="section-label">The Financial Case</div>
+        <h2 class="section-title" style="margin: 0 auto;">Collective vs. Going Alone</h2>
+        <p class="section-text" style="margin: 1rem auto 0; text-align: center;">For a firm with up to 50 employees</p>
+      </div>
+
+      <table class="comparison-table">
+        <thead>
+          <tr>
+            <th>Item</th>
+            <th>Going Alone</th>
+            <th>Annual Subscription</th>
+            <th>Monthly Subscription</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Annual Software Cost (Retail)</td>
+            <td class="price-old">$4,800</td>
+            <td>$1,130 <span class="price-note">PI HIRE module</span></td>
+            <td>$1,130 <span class="price-note">PI HIRE module</span></td>
+          </tr>
+          <tr>
+            <td>Annual Training (Standalone)</td>
+            <td class="price-old">$3,750</td>
+            <td>$0 <span class="price-note">Covered by subscription</span></td>
+            <td>$0 <span class="price-note">Covered by subscription</span></td>
+          </tr>
+          <tr>
+            <td>Annual Managed Services*</td>
+            <td>$0</td>
+            <td>$2,000 <span class="price-note">Upfront payment</span></td>
+            <td>$2,400 <span class="price-note">$200/month</span></td>
+          </tr>
+          <tr>
+            <td>Total Annual Cost</td>
+            <td class="price-old">$8,550</td>
+            <td><span class="price-highlight">$3,130</span></td>
+            <td><span class="price-highlight">$3,530</span></td>
+          </tr>
+        </tbody>
+      </table>
+
+      <p style="text-align: center; color: var(--slate-400); font-size: 0.9rem; margin-top: 1.5rem;">
+        *Annual subscription paid upfront = <strong style="color: var(--white);">two months free</strong>
+      </p>
+
+      <div class="savings-callout">
+        <div class="savings-item">
+          <div class="savings-value">$5,420</div>
+          <div class="savings-label">Annual Savings with Collective</div>
+        </div>
+        <div class="savings-item">
+          <div class="savings-value">63%</div>
+          <div class="savings-label">Total Cost Reduction</div>
+        </div>
+        <div class="savings-item">
+          <div class="savings-value">Zero</div>
+          <div class="savings-label">Technical Burden on You</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="features">
+    <div class="section-label">Zero-Burden Model</div>
+    <h2 class="section-title">What's Included</h2>
+    <p class="section-text">AUDIA's Managed Talent Insights Center removes the technical burden from principals. Designate a single PI Champion and we handle the rest.</p>
+
+    <div class="features-grid">
+      <div class="feature-card">
+        <div class="feature-icon">🎓</div>
+        <h3>Live Virtual Workshop</h3>
+        <p>Annual alignment session for your entire staff to embed behavioral insights into your firm's culture.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">📊</div>
+        <h3>Expert Profile Analysis</h3>
+        <p>Strategic requests processed within 24 hours. Get actionable insights without learning the technical side.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🔒</div>
+        <h3>Data Governance</h3>
+        <p>AUDIA manages all technical setup, folder security, and report generation—your data stays protected.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="optional">
+    <div class="section-label">A La Carte Services</div>
+    <h2 class="section-title">Optional Recruitment & Expertise</h2>
+    <p class="section-text">For firms looking to leverage PI for hiring and development, AUDIA offers additional support:</p>
+
+    <div class="features-grid">
+      <div class="feature-card">
+        <div class="feature-icon">🎯</div>
+        <h3>Job Targets</h3>
+        <p>Scientific definition of the behavioral drives for success required for specific roles.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">👥</div>
+        <h3>Candidate Fit Overviews</h3>
+        <p>Expert-led analysis of prospective finalists to ensure the right behavioral match.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">💼</div>
+        <h3>1:1 Coaching</h3>
+        <p>Private sessions for Owners and Partners to maximize leadership effectiveness.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="timeline">
+    <div style="text-align: center; margin-bottom: 3rem;">
+      <div class="section-label">Implementation</div>
+      <h2 class="section-title" style="margin: 0 auto;">Roadmap to Success</h2>
+    </div>
+
+    <div class="timeline">
+      <div class="timeline-item">
+        <div class="timeline-content">
+          <div class="timeline-step">Step 1</div>
+          <h4>Commitment</h4>
+          <p>Founding 10 firms sign the MOU during the Commitment Window</p>
+        </div>
+        <div class="timeline-marker"><div class="timeline-dot"></div></div>
+        <div style="width: 45%;"></div>
+      </div>
+      
+      <div class="timeline-item">
+        <div class="timeline-content">
+          <div class="timeline-step">Step 2</div>
+          <h4>Fulfillment</h4>
+          <p>Payment of Software Subscription + $2,000 Managed Service Fee</p>
+        </div>
+        <div class="timeline-marker"><div class="timeline-dot"></div></div>
+        <div style="width: 45%;"></div>
+      </div>
+      
+      <div class="timeline-item">
+        <div class="timeline-content">
+          <div class="timeline-step">Month 1</div>
+          <h4>Launch Workshop</h4>
+          <p>Live Virtual Workshop for all staff to kick off cultural alignment</p>
+        </div>
+        <div class="timeline-marker"><div class="timeline-dot"></div></div>
+        <div style="width: 45%;"></div>
+      </div>
+      
+      <div class="timeline-item">
+        <div class="timeline-content">
+          <div class="timeline-step">Annually</div>
+          <h4>Tune-Up Sessions</h4>
+          <p>Live Virtual sessions to review Caution Areas and maintain momentum</p>
+        </div>
+        <div class="timeline-marker"><div class="timeline-dot"></div></div>
+        <div style="width: 45%;"></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta">
+    <h2 class="cta-title">Ready to Give X-Team a Competitive Edge?</h2>
+    <p class="cta-text">More than a discount—a shared language for navigating conflict, optimizing leadership, and defining behavioral success. Work smarter. Stay together longer. Lead with confidence.</p>
+    <a href="/cdn-cgi/l/email-protection#a8cbc7c6dcc9cbdce8c9ddccc1c9cbc7c6dbddc4dcc1c6cf86cbc7c5" class="cta-button">Join the Founding 10</a>
+  </section>
+
+  <footer>
+    <p>X-Team Talent Optimization Project &middot; Powered by <a href="#">AUDIA Consulting</a> &middot; Predictive Index Partner</p>
+  </footer>
+
+  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+    // Intersection Observer for scroll animations
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.style.opacity = '1';
+          entry.target.style.transform = 'translateY(0)';
+        }
+      });
+    }, observerOptions);
+
+    // Observe sections
+    document.querySelectorAll('section:not(.hero)').forEach(section => {
+      section.style.opacity = '0';
+      section.style.transform = 'translateY(30px)';
+      section.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
+      observer.observe(section);
+    });
+
+    // Observe feature cards
+    document.querySelectorAll('.feature-card, .drive-card, .timeline-item').forEach((card, index) => {
+      card.style.opacity = '0';
+      card.style.transform = 'translateY(20px)';
+      card.s
