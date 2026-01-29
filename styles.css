@@ -1,0 +1,109 @@
+/* Background Pattern */
+.bg-pattern {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  background: 
+    radial-gradient(ellipse at 20% 20%, rgba(45, 90, 135, 0.3) 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 80%, rgba(26, 54, 93, 0.4) 0%, transparent 50%),
+    linear-gradient(180deg, #0a1628 0%, #132039 100%);
+}
+
+.bg-pattern::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: 
+    radial-gradient(circle at 25% 25%, rgba(255,255,255,0.02) 1px, transparent 1px),
+    radial-gradient(circle at 75% 75%, rgba(255,255,255,0.02) 1px, transparent 1px);
+  background-size: 60px 60px;
+}
+
+/* Navigation */
+nav {
+  background: linear-gradient(180deg, rgba(10, 22, 40, 0.95) 0%, transparent 100%);
+  backdrop-filter: blur(10px);
+}
+
+/* Gradient Text */
+.gradient-text {
+  background: linear-gradient(135deg, #f97316 0%, #fbbf24 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Pricing Section Background */
+.pricing {
+  background: linear-gradient(180deg, transparent 0%, rgba(26, 54, 93, 0.2) 50%, transparent 100%);
+}
+
+/* CTA Glow Effect */
+.cta-glow {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle, rgba(249, 115, 22, 0.15) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+@media (max-width: 640px) {
+  .cta-glow {
+    width: 400px;
+    height: 400px;
+  }
+}
+
+/* Scroll Animations */
+.scroll-animate {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.scroll-animate.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #0a1628;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #2d5a87;
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #f97316;
+}
+
+/* Print Styles */
+@media print {
+  .bg-pattern,
+  nav,
+  .scroll-indicator,
+  .cta-button {
+    display: none;
+  }
+  
+  body {
+    background: white;
+    color: black;
+  }
+}
