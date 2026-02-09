@@ -238,10 +238,12 @@
 
     .hero-stats {
       display: flex;
-      gap: 4rem;
+      gap: 3rem;
       margin-top: 2rem;
       animation: fadeInUp 0.8s ease 0.3s forwards;
       opacity: 0;
+      flex-wrap: wrap;
+      justify-content: center;
     }
 
     .stat {
@@ -611,7 +613,7 @@
       left: 0;
       right: 0;
       height: 3px;
-      background: linear-gradient(90deg, var(--electric-magenta) 0%, var(--accent-yellow) 50%, var(--teal) 100%);
+      background: linear-gradient(90deg, var(--electric-magenta) 0%, var(--accent-yellow) 25%, var(--teal) 50%, var(--aqua) 75%, var(--purple) 100%);
       border-radius: 2px;
     }
 
@@ -1146,7 +1148,7 @@
         right: auto;
         width: 3px;
         height: auto;
-        background: linear-gradient(180deg, var(--electric-magenta) 0%, var(--accent-yellow) 33%, var(--teal) 66%, var(--aqua) 100%);
+        background: linear-gradient(180deg, var(--electric-magenta) 0%, var(--accent-yellow) 25%, var(--teal) 50%, var(--aqua) 75%, var(--purple) 100%);
       }
 
       .timeline-step {
@@ -1276,16 +1278,16 @@
     
     <div class="hero-stats">
       <div class="stat">
-        <div class="stat-value">70-75%</div>
-        <div class="stat-label">Software Savings</div>
-      </div>
-      <div class="stat">
         <div class="stat-value">~$5,000</div>
-        <div class="stat-label">Saved Annually</div>
+        <div class="stat-label">Annual Savings with Collective</div>
       </div>
       <div class="stat">
-        <div class="stat-value">24hr</div>
-        <div class="stat-label">Support Turnaround</div>
+        <div class="stat-value">70-75%</div>
+        <div class="stat-label">Below Retail Software Rate</div>
+      </div>
+      <div class="stat">
+        <div class="stat-value">Plus</div>
+        <div class="stat-label">Dedicated Advisory<br>and Administration</div>
       </div>
     </div>
   </section>
@@ -1296,7 +1298,7 @@
         <div class="section-label">The Opportunity</div>
         <h2 class="section-title">Collective Buying Model for <span class="highlight-magenta">Predictive Index</span></h2>
         <p class="section-text">AUDIA Consulting proposes a <strong>Collective Buying Model</strong> for <span class="highlight-gold">X-Team</span> to access and deploy the <strong><span class="highlight-magenta">Predictive Index</span> (PI)</strong> software and service, complete with training and administrative support.</p>
-        <p class="section-text">The <strong>'Founding Firms'</strong> model levels the playing field. By aggregating headcount from 12–15 founding firms, <span class="highlight-gold">X-Team</span> will provide smaller partner firms with the same elite behavioral insights used by the Fortune 500 at a <strong>wholesale price point 70-75% below the standard retail rate.</strong></p>
+        <p class="section-text">The <strong>'Collective'</strong> model levels the playing field. By aggregating headcount from 12–15 founding firms, <span class="highlight-gold">X-Team</span> will provide smaller partner firms with the same elite behavioral insights used by the Fortune 500 at a <strong>wholesale price point 70-75% below the standard retail rate.</strong></p>
       </div>
       
       <div class="drives-grid">
@@ -1385,12 +1387,8 @@
           <div class="savings-label">Below Retail Software Rate</div>
         </div>
         <div class="savings-item">
-          <div class="savings-value">Zero</div>
-          <div class="savings-label">Technical Burden on You</div>
-        </div>
-        <div class="savings-item">
           <div class="savings-value">Plus</div>
-          <div class="savings-label">Dedicated Technical Advisory<br>and Administration</div>
+          <div class="savings-label">Dedicated Advisory<br>and Administration</div>
         </div>
       </div>
     </div>
@@ -1480,6 +1478,15 @@
           <div class="timeline-label">Month 1</div>
           <h4>Launch Workshop</h4>
           <p>Live Virtual Workshop for all staff to kick off cultural alignment</p>
+        </div>
+      </div>
+
+      <div class="timeline-step">
+        <div class="timeline-dot"></div>
+        <div class="timeline-card">
+          <div class="timeline-label">Monthly</div>
+          <h4>X-Team Community Cohort</h4>
+          <p>Live and recorded strategy sessions to share best practices and solve common problems.</p>
         </div>
       </div>
       
@@ -1650,7 +1657,7 @@
 
   <section class="cta">
     <h2 class="cta-title">Ready to Give Your <span class="highlight-gold">X-Team</span> Firm a Competitive Edge?</h2>
-    <p class="cta-text">More than a discount. A shared language for navigating conflict, optimizing leadership, and defining behavioral success. Work smarter. Stay together longer. Lead with confidence.</p>
+    <p class="cta-text">World-class team building software at an enormous discount, plus an expert advisor who trains you and provides administrative support throughout the journey — all in community with other <span class="highlight-gold">X-Team</span> Founding Firms.</p>
     <a href="#signup" class="cta-button">Become a Founding Firm</a>
   </section>
 
